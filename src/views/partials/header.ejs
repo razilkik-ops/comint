@@ -1,0 +1,136 @@
+<%
+  const classicHeaderPaths = ['/company', '/services', '/cases', '/oplata-i-dostavka', '/news', '/reviews', '/contacts', '/karta-sajta'];
+  const useClassicPhones = classicHeaderPaths.includes(currentPath);
+  const headerPhone = useClassicPhones ? '+375 (29) 392 90 04' : siteConfig.phone;
+  const headerExtraPhones = useClassicPhones
+    ? ['+375 (29) 700-77-67', '8 (017) 374-00-24', '8 (017) 374-00-26']
+    : siteConfig.extraPhones;
+  const phoneHref = (phone) => phone.replace(/[^\d+]/g, '');
+%>
+<aside class="legacy-rail" aria-label="Боковая навигация">
+  <button class="legacy-burger menu-toggle donor-menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="donor-menu" data-menu-mode="primary">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <button class="legacy-catalog-link donor-menu-toggle" type="button" aria-label="Открыть каталог" aria-expanded="false" aria-controls="donor-menu" data-menu-mode="catalog">
+    <span class="donor-toggle-marker">+</span>Каталог
+  </button>
+  <div class="legacy-rail-socials menu_social_block" aria-label="Социальные сети">
+    <div class="legacy-rail-socials-extra menu_social_box">
+      <a class="social-youtube social_you" href="https://www.youtube.com/channel/UCofXUIKBzxe39KT6BS24qfQ" target="_blank" rel="nofollow noopener" aria-label="YouTube">
+        <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+          <rect x="3.5" y="6" width="23" height="18" rx="5" />
+          <path d="M13 11.5v7l6-3.5-6-3.5Z" />
+        </svg>
+      </a>
+      <a class="social_vk" href="https://vk.com/comint" target="_blank" rel="nofollow noopener" aria-label="VK">
+        <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+          <circle cx="15" cy="15" r="11.5" />
+          <path d="M8 11h2.3c.3 2.8 1.5 4.8 3.1 5.2V11h2.2v3c1.4-.2 2.5-1.5 2.9-3H21c-.5 1.8-1.5 3.1-2.7 3.8 1.2.6 2.5 1.9 3 4.2h-2.6c-.5-1.4-1.6-2.5-3.1-2.7V19h-.5c-4.3 0-6.8-2.9-7.1-8Z" />
+        </svg>
+      </a>
+      <a class="social_insa" href="https://www.instagram.com/comintminsk/" target="_blank" rel="nofollow noopener" aria-label="Instagram">
+        <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+          <rect x="4.5" y="4.5" width="21" height="21" rx="6" />
+          <circle cx="15" cy="15" r="5" />
+          <circle cx="21" cy="9" r="1.2" />
+        </svg>
+      </a>
+    </div>
+    <a class="social_tel" href="<%= siteConfig.TELEGRAM_MANAGER_URL || 'https://t.me/Comint_2024_bot' %>" target="_blank" rel="nofollow noopener" aria-label="Telegram">
+      <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+        <circle cx="15" cy="15" r="14.5" />
+        <path d="M8 14.6 22 9.1l-2.4 11.7c-.1.6-.7.8-1.2.5l-3.8-2.8-1.9 1.9c-.2.2-.4.4-.8.4l.3-4.1 7.5-6.8-9.2 5.8-4-1.3c-.6-.2-.6-.7.5-1.1Z" />
+      </svg>
+    </a>
+  </div>
+</aside>
+
+<header class="site-header legacy-header">
+  <a class="brand" href="/" aria-label="Comint — на главную">
+    <img class="brand-logo" src="/comint-logo.svg" alt="<%= siteConfig.companyName %>">
+  </a>
+
+  <div class="donor-header-actions">
+    <form class="donor-search" action="/services" method="get" role="search">
+      <label for="header-search">Поиск по услугам</label>
+      <input id="header-search" type="search" name="q" placeholder="Поиск по услугам" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+      <button type="submit" aria-label="Искать">
+        <span></span>
+      </button>
+    </form>
+
+    <div class="donor-phone">
+      <a class="donor-phone-primary" href="tel:<%= phoneHref(headerPhone) %>">
+        <span><%= headerPhone %></span>
+      </a>
+      <div class="donor-phone-list">
+        <a href="tel:<%= phoneHref(headerPhone) %>"><%= headerPhone %></a>
+        <% headerExtraPhones.forEach((phone) => { %>
+          <a href="tel:<%= phoneHref(phone) %>"><%= phone %></a>
+        <% }) %>
+      </div>
+    </div>
+
+    <a class="donor-contact-button" href="/contacts">Связаться с нами</a>
+
+    <button class="menu-toggle mobile-menu-toggle donor-menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="donor-menu" data-menu-mode="primary">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="donor-menu" id="donor-menu" aria-hidden="true">
+  <div class="donor-menu-panel">
+    <div class="donor-menu-top">
+      <a class="brand donor-menu-logo" href="/" aria-label="Comint — на главную">
+        <img class="brand-logo" src="/comint-logo.svg" alt="<%= siteConfig.companyName %>">
+      </a>
+      <button class="donor-menu-close" type="button" aria-label="Закрыть меню">×</button>
+    </div>
+
+    <div class="donor-menu-layout">
+      <nav class="donor-primary-nav" aria-label="Основная навигация">
+        <% headerPrimaryMenu.forEach((item) => { %>
+          <a href="<%= item.url %>" class="<%= currentPath === item.url ? 'active' : '' %>"><%= item.title %></a>
+        <% }) %>
+      </nav>
+
+      <div class="donor-menu-info">
+        <section>
+          <h2>Коротко о нашей компании</h2>
+          <p>Нашим основным видом деятельности всегда являлось производство рекламной продукции, работа в сфере рекламных материалов и технологий.</p>
+          <p>Ассортимент предлагаемой нами продукции бесконечен, все заказы выполняются индивидуально.</p>
+        </section>
+        <section>
+          <h2>Свяжитесь с нами</h2>
+          <div class="donor-menu-contacts">
+            <a href="tel:<%= phoneHref(headerPhone) %>"><%= headerPhone %></a>
+            <% headerExtraPhones.forEach((phone) => { %>
+              <a href="tel:<%= phoneHref(phone) %>"><%= phone %></a>
+            <% }) %>
+          </div>
+        </section>
+        <section class="donor-menu-meta">
+          <div>
+            <h2>Напишите нам</h2>
+            <a href="mailto:<%= siteConfig.email %>"><%= siteConfig.email %></a>
+          </div>
+          <div>
+            <h2>График работы</h2>
+            <p>9.00 - 18.00 (пн-чт)</p>
+            <p>9.00 - 17.00 (пт)</p>
+            <p>вс - выходной</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <nav class="donor-catalog-nav" aria-label="Каталог услуг">
+      <%- include('menu-tree', { items: headerCatalogMenu, level: 0 }) %>
+    </nav>
+  </div>
+</div>

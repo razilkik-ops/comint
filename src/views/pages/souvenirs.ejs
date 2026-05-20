@@ -1,0 +1,93 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%
+  const productBySlug = new Map(products.map((item) => [item.slug, item]));
+  const souvenirGroups = [
+    {
+      title: 'Упаковка и пакеты',
+      slug: 'packaging',
+      intro: 'Коробки, бумажные и полиэтиленовые пакеты для подарков, продаж и мероприятий.',
+      slugs: ['kartonnye-korobki-i-pakety-dlya-upakovki', 'bumazhnyie-paketyi', 'polietilenovyie-paketyi']
+    },
+    {
+      title: 'Офисные сувениры',
+      slug: 'office',
+      intro: 'Предметы, которые каждый день работают на узнаваемость бренда.',
+      slugs: ['ruchki-s-logotipom', 'ezhednevniki', 'fleshki-s-logotipom', 'breloki-s-logotipom', 'chasy', 'zazhigalki']
+    },
+    {
+      title: 'Подарки и мерч',
+      slug: 'gifts',
+      intro: 'Подарочные наборы и полезный мерч для клиентов, сотрудников и партнёров.',
+      slugs: ['podarochnyie-naboryi', 'firmennyie-kruzhki', 'kovriki-dlya-myishi', 'tarelki', 'pazlyi', 'podstavki-iz-probki', 'zerkala-karmannye', 'suveniry-dlya-medrabotnikov']
+    },
+    {
+      title: 'Текстиль и мероприятия',
+      slug: 'events',
+      intro: 'Флажки, кепки, сумки, магниты и нанесение для промо-акций и событий.',
+      slugs: ['flazhki', 'kepki', 'eko-sumki', 'pechat-na-magnitax1', 'uf-pechat-v-minske']
+    }
+  ].map((group) => ({
+    ...group,
+    items: group.slugs.map((slug) => productBySlug.get(slug)).filter(Boolean)
+  })).filter((group) => group.items.length);
+
+  const groupedSlugs = new Set(souvenirGroups.flatMap((group) => group.items.map((item) => item.slug)));
+  const otherProducts = products.filter((item) => !groupedSlugs.has(item.slug));
+
+  if (otherProducts.length) {
+    souvenirGroups.push({
+      title: 'Другие сувениры',
+      slug: 'other',
+      intro: 'Дополнительные позиции сувенирного каталога.',
+      items: otherProducts
+    });
+  }
+%>
+
+<main class="souvenir-catalog-main">
+  <section class="catalog-section souvenir-catalog-section">
+    <div class="section-heading">
+      <span class="eyebrow">Каталог сувениров</span>
+      <h2>Сувенирная продукция</h2>
+      <p>Брендированные подарки, упаковка, мерч и предметы с логотипом для клиентов, сотрудников, партнёров и промо-мероприятий.</p>
+      <strong class="souvenir-service-count"><%= products.length %> услуг</strong>
+    </div>
+
+    <div class="souvenir-filter-tabs" aria-label="Фильтры сувенирной продукции">
+      <a class="active" href="/souvenirs">Все</a>
+      <% souvenirGroups.forEach((group) => { %>
+        <a href="#souvenir-category-<%= group.slug %>"><%= group.title %></a>
+      <% }) %>
+    </div>
+
+    <div class="souvenir-category-list">
+      <% souvenirGroups.forEach((group, groupIndex) => { %>
+        <section class="souvenir-category-group" id="souvenir-category-<%= group.slug %>">
+          <div class="souvenir-category-heading">
+            <div>
+              <span><%= String(groupIndex + 1).padStart(2, '0') %></span>
+              <h3><%= group.title %></h3>
+              <p><%= group.intro %></p>
+            </div>
+            <strong><%= group.items.length %></strong>
+          </div>
+          <div class="service-grid">
+            <% group.items.forEach((item, index) => { %>
+              <%- include('../partials/service-card', { item, itemIndex: index + groupIndex }) %>
+            <% }) %>
+          </div>
+        </section>
+      <% }) %>
+    </div>
+  </section>
+
+  <%- include('../partials/lead-form', {
+    title: 'Заявка на сувенирную продукцию',
+    description: 'Опишите предметы, нанесение, тираж и примерный бюджет, если он уже известен.',
+    defaultCategory: 'Сувенирная продукция',
+    sourcePage: 'souvenirs'
+  }) %>
+</main>
+
+<%- include('../partials/footer') %>

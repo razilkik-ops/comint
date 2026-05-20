@@ -1,0 +1,147 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main>
+  <%
+    const souvenirCategory = serviceCatalog.find((category) => category.slug === 'souvenirs');
+    const souvenirServiceSlides = souvenirCategory ? createServiceItems(souvenirCategory) : [];
+    const souvenirSlideImages = {
+      'kartonnye-korobki-i-pakety-dlya-upakovki': 'korobki.png',
+      'uf-pechat-v-minske': 'uf-pechat-v-minske-photo.png',
+      'ruchki-s-logotipom': 'ruchki-s-logotipom-photo.png',
+      'ezhednevniki': 'ezhednevniki-photo.png',
+      'breloki-s-logotipom': 'breloki-s-logotipom-photo.png',
+      'pechat-na-magnitax1': 'pechat-na-magnitax1-photo.png',
+      'chasy': 'chasy-photo.png',
+      'flazhki': 'flazhki-photo.png',
+      'bumazhnyie-paketyi': 'bumazhnyie-paketyi-photo.png',
+      'polietilenovyie-paketyi': 'polietilenovyie-paketyi-photo.png',
+      'fleshki-s-logotipom': 'fleshki-s-logotipom-photo.png',
+      'zazhigalki': 'zazhigalki-photo.png'
+    };
+  %>
+  <section class="hero choice-hero">
+    <div class="hero-content">
+      <span class="eyebrow">Comint для бизнеса</span>
+      <h1>Рекламная продукция, полиграфия и мерч для бизнеса</h1>
+      <p>Собрали все услуги Comint в понятный современный сайт: выберите направление, каталог или сразу оставьте заявку менеджеру.</p>
+      <div class="hero-actions">
+        <a class="button" href="/services">Открыть полный каталог</a>
+        <a class="button outline" href="#lead-form">Быстрая заявка</a>
+      </div>
+    </div>
+    <div class="direction-grid hero-directions" aria-label="Выбор направления">
+      <%- include('../partials/direction-card', {
+        icon: '01',
+        title: 'Полиграфия',
+        text: 'Печать визиток, листовок, буклетов, каталогов, наклеек и другой полиграфической продукции.',
+        href: '/print',
+        buttonText: 'Перейти к полиграфии',
+        buttonClass: '',
+        modifier: 'print'
+      }) %>
+      <article class="direction-card souvenir souvenir-slider" data-souvenir-slider>
+        <div class="souvenir-slider-viewport">
+          <div class="souvenir-slide active" data-souvenir-slide>
+            <div class="souvenir-slide-copy">
+              <div class="direction-icon">02</div>
+              <h3>Сувенирная продукция</h3>
+              <p>Брендированные сувениры, подарки, мерч и продукция с логотипом компании.</p>
+              <a class="button" href="/souvenirs">Смотреть сувениры</a>
+            </div>
+            <figure class="souvenir-slide-visual">
+              <img src="/images/souvenir-slides/souvenirs-overview-photo.png" alt="" loading="eager">
+            </figure>
+          </div>
+          <% souvenirServiceSlides.forEach((item, index) => { %>
+            <div class="souvenir-slide" data-souvenir-slide>
+              <div class="souvenir-slide-copy">
+                <div class="direction-icon"><%= String(index + 3).padStart(2, '0') %></div>
+                <span class="souvenir-slide-kicker">Услуга</span>
+                <h3><%= item.title %></h3>
+                <p>Сувенирная продукция Comint: нанесение, брендирование и изготовление под задачу бизнеса.</p>
+                <a class="button outline" href="<%= item.url %>">Подробнее</a>
+              </div>
+              <figure class="souvenir-slide-visual">
+                <img
+                  src="/images/souvenir-slides/<%= souvenirSlideImages[item.slug] || `${item.slug}.svg` %>"
+                  alt=""
+                  loading="lazy"
+                >
+              </figure>
+            </div>
+          <% }) %>
+        </div>
+        <div class="souvenir-slider-controls" aria-label="Слайдер сувенирной продукции">
+          <button type="button" class="souvenir-slider-arrow" data-souvenir-prev aria-label="Предыдущий слайд">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15 5 8 12l7 7" />
+            </svg>
+          </button>
+          <div
+            class="souvenir-slider-progress"
+            data-souvenir-progress
+            role="slider"
+            tabindex="0"
+            aria-label="Позиция слайда"
+            aria-valuemin="1"
+            aria-valuemax="<%= souvenirServiceSlides.length + 1 %>"
+            aria-valuenow="1"
+            aria-valuetext="1 из <%= souvenirServiceSlides.length + 1 %>"
+          >
+            <span class="souvenir-slider-progress-track" aria-hidden="true">
+              <span class="souvenir-slider-progress-fill" data-souvenir-progress-fill></span>
+            </span>
+            <span class="souvenir-slider-progress-thumb" data-souvenir-progress-thumb aria-hidden="true"></span>
+          </div>
+          <button type="button" class="souvenir-slider-arrow" data-souvenir-next aria-label="Следующий слайд">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </article>
+      <%- include('../partials/direction-card', {
+        icon: '03',
+        title: 'Связаться с менеджером',
+        text: 'Не знаете, что выбрать? Напишите менеджеру — поможем подобрать решение под вашу задачу.',
+        href: siteConfig.TELEGRAM_MANAGER_URL || '#',
+        buttonText: 'Написать в Telegram',
+        buttonClass: 'outline',
+        modifier: 'manager'
+      }) %>
+    </div>
+  </section>
+
+  <section class="proof-section">
+    <div class="proof-card">
+      <span>01</span>
+      <strong>Любая форма оплаты</strong>
+      <p>Наличный и безналичный расчет с оформлением документов.</p>
+    </div>
+    <div class="proof-card">
+      <span>02</span>
+      <strong>Доставка по городу</strong>
+      <p>Доставим своим транспортом или организуем отправку заказа.</p>
+    </div>
+    <div class="proof-card">
+      <span>03</span>
+      <strong>Цветопроба</strong>
+      <p>Поможем проверить цвет и качество перед производством тиража.</p>
+    </div>
+    <div class="proof-card">
+      <span>04</span>
+      <strong>Заказ в удобное время</strong>
+      <p>Быстро примем задачу и подскажем следующий шаг.</p>
+    </div>
+  </section>
+
+  <%- include('../partials/lead-form', {
+    title: 'Общая заявка',
+    description: 'Если задача пока не укладывается в категорию, опишите ее свободно.',
+    defaultCategory: '',
+    sourcePage: 'home'
+  }) %>
+</main>
+
+<%- include('../partials/footer') %>

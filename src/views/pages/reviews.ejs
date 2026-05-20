@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main class="company-copy-page classic-page">
+  <%- include('../partials/classic-banner', {
+    crumb: 'Отзывы',
+    title: 'Отзывы',
+    text: 'Ознакомьтесь с отзывами о нашей работе.'
+  }) %>
+
+  <section class="about">
+    <div class="wrap">
+      <div class="content">
+        <div class="reviews">
+          <% reviews.forEach((item) => { %>
+            <article class="reviews__item">
+              <div class="reviews__item--title"><%= item.title %></div>
+              <div class="reviews__item--company"><%= item.company %></div>
+              <div class="reviews__item--text"><%= item.text %></div>
+            </article>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

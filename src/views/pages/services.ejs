@@ -1,0 +1,85 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%
+  const catalogToRender = typeof visibleServiceCatalog !== 'undefined' ? visibleServiceCatalog : serviceCatalog;
+  const isSearchMode = typeof searchQuery !== 'undefined' && searchQuery;
+  const serviceCardTitles = {
+    print: 'Полиграфия',
+    souvenirs: 'Сувениры',
+    stickers: 'Самоклейка',
+    outdoor: 'Наружка',
+    'large-format': 'Широкоформат',
+    exhibitions: 'Выставка',
+    calendars: '',
+    decor: 'Декор',
+    retail: 'Места продаж',
+    'mobile-equipment': 'Моб. оборуд-е',
+    navigation: 'Навигация',
+    textile: 'Одежда',
+    transport: 'Транспорт'
+  };
+%>
+
+<main class="company-copy-page classic-page classic-catalog-page">
+  <%- include('../partials/classic-banner', {
+    crumb: 'Каталог',
+    title: 'Каталог',
+    text: 'Ознакомьтесь с полным перечнем услуг нашей типографии.',
+    rightText: 'Наша компания предоставляет широкий спектр услуг: все виды полиграфии, сувенирную продукцию, наружную рекламу, оформление выставок, навигацию и POS-материалы.'
+  }) %>
+
+  <% if (isSearchMode) { %>
+    <section class="service-search-summary" aria-live="polite">
+      <div class="wrap">
+        <p>Результаты поиска по услугам</p>
+        <h2><%= searchQuery %></h2>
+        <span><%= searchResultCount %> <%= searchResultCount === 1 ? 'услуга найдена' : 'услуг найдено' %></span>
+      </div>
+    </section>
+  <% } %>
+
+  <section class="main_services">
+    <div class="wrap">
+      <div class="main_services_container">
+        <% if (!catalogToRender.length) { %>
+          <div class="service-search-empty">
+            <h2>Ничего не нашли</h2>
+            <p>Попробуйте другой запрос или откройте полный каталог.</p>
+          </div>
+        <% } %>
+        <% catalogToRender.forEach((category, index) => {
+          const categoryItems = createServiceItems(category);
+        %>
+          <article class="main_services_block" id="category-<%= category.slug %>">
+            <ul class="<%= !isSearchMode && categoryItems.length > 3 ? 'hide' : '' %>">
+              <% categoryItems.forEach((item) => { %>
+                <li><a href="<%= item.url %>"><%= item.title %></a></li>
+              <% }) %>
+            </ul>
+            <% if (!isSearchMode && categoryItems.length > 3) { %>
+              <button class="services_show show" type="button" aria-expanded="false">
+                <span>Показать все</span>
+                <svg width="23" height="12" viewBox="0 0 23 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M22.848 5.61738L17.6208 0.18973C17.4331 -0.0379381 17.1031 -0.0644783 16.8838 0.130539C16.6645 0.32551 16.639 0.668155 16.8268 0.895823C16.8443 0.917046 16.8634 0.936869 16.8838 0.955014L21.2171 5.45996H0.522702C0.234039 5.45996 0 5.70297 0 6.00275C0 6.30253 0.234039 6.5455 0.522702 6.5455H21.2171L16.8838 11.045C16.6645 11.24 16.639 11.5826 16.8268 11.8103C17.0146 12.0379 17.3446 12.0645 17.5638 11.8695C17.5843 11.8513 17.6034 11.8315 17.6208 11.8103L22.848 6.38262C23.0507 6.171 23.0507 5.8291 22.848 5.61738Z" fill="#616161"/>
+                </svg>
+              </button>
+            <% } %>
+            <div class="main_services_block_img">
+              <img src="<%= category.image || [
+                'https://comint.by/wp-content/uploads/2023/05/kartinka-2.png',
+                'https://comint.by/wp-content/uploads/2023/04/kartinka-statika-1.png',
+                'https://comint.by/wp-content/uploads/2023/04/mask-group-7.png',
+                'https://comint.by/wp-content/uploads/2023/04/mask-group-9.png',
+                'https://comint.by/wp-content/uploads/2023/04/mask-group-6.png',
+                'https://comint.by/wp-content/uploads/2023/04/mask-group-7-1.png'
+              ][index % 6] %>" alt="">
+            </div>
+            <div class="main_services_block_title"><%= serviceCardTitles[category.slug] ?? category.title %></div>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

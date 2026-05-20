@@ -1,0 +1,139 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%
+  const hasMigratedContent = Boolean(content?.sections?.length);
+  const visibleGallery = content?.gallery || [];
+%>
+
+<main class="service-detail-page">
+  <section class="service-detail-hero <%= content?.heroImage ? 'has-service-image' : '' %>">
+    <div class="breadcrumbs">
+      <a href="/">Главная</a>
+      <span>/</span>
+      <a href="/services">Каталог</a>
+      <span>/</span>
+      <a href="/services#category-<%= service.categorySlug %>"><%= service.category %></a>
+    </div>
+    <div class="service-detail-grid">
+      <div class="service-hero-copy">
+        <span class="eyebrow"><%= service.category %></span>
+        <h1><%= content?.title || service.title %></h1>
+        <p><%= service.description %></p>
+        <div class="hero-actions">
+          <a class="button" href="#lead-form" data-fill-service="<%= service.title %>" data-fill-category="<%= service.category %>">Рассчитать стоимость</a>
+          <a class="button outline" href="/services">Вернуться в каталог</a>
+        </div>
+      </div>
+      <aside class="service-summary">
+        <% if (content?.heroImage) { %>
+          <img src="<%= content.heroImage.src %>" alt="<%= content.heroImage.alt || content.title %>">
+        <% } %>
+        <div class="service-summary-content">
+          <span>Параметры заявки</span>
+          <ul>
+            <li>Формат и материал подбираются под задачу.</li>
+            <li>Тираж и сроки рассчитываются индивидуально.</li>
+            <li>Можно отправить макет или заказать подготовку дизайна.</li>
+            <li>Менеджер уточнит детали и предложит оптимальный способ изготовления.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <% if (hasMigratedContent) { %>
+    <nav class="service-section-nav" aria-label="Разделы страницы">
+      <% content.sections.forEach((section, index) => { %>
+        <a href="#<%= section.id %>"><span><%= String(index + 1).padStart(2, '0') %></span><%= section.title %></a>
+      <% }) %>
+      <% if (visibleGallery.length) { %>
+        <a href="#service-gallery"><span>Фото</span>Галерея работ</a>
+      <% } %>
+    </nav>
+  <% } %>
+
+  <% if (hasMigratedContent) { %>
+    <section class="migrated-content">
+      <% content.sections.forEach((section, index) => { %>
+        <article class="migrated-section" id="<%= section.id %>">
+          <div class="migrated-section-label">
+            <span><%= String(index + 1).padStart(2, '0') %></span>
+            <strong><%= section.title %></strong>
+          </div>
+          <div class="migrated-richtext">
+            <%- section.html %>
+          </div>
+        </article>
+      <% }) %>
+    </section>
+  <% } else { %>
+    <section class="service-content">
+      <div class="service-copy">
+        <span class="eyebrow">Об услуге</span>
+        <h2>Как мы работаем с этой задачей</h2>
+        <p>Comint производит рекламную, полиграфическую и сувенирную продукцию индивидуально под запрос клиента. Для услуги «<%= service.title %>» менеджер уточнит назначение, место использования, желаемый внешний вид, тираж, сроки и требования к макету.</p>
+        <p>После этого мы подбираем технологию изготовления, материал, формат и финальную комплектацию. Если макета нет, можно заложить подготовку дизайна или адаптацию существующих материалов.</p>
+      </div>
+      <div class="steps-panel">
+        <div>
+          <span>01</span>
+          <strong>Задача</strong>
+          <p>Вы описываете, что нужно изготовить и для чего будет использоваться продукция.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <strong>Расчет</strong>
+          <p>Мы уточняем параметры, тираж, материалы, сроки и готовим расчет стоимости.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <strong>Производство</strong>
+          <p>После согласования запускаем изготовление и готовим заказ к выдаче или доставке.</p>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+  <% if (visibleGallery.length) { %>
+    <section class="service-gallery-section" id="service-gallery">
+      <div class="section-heading">
+        <span class="eyebrow">Примеры работ</span>
+        <h2>Галерея работ</h2>
+        <p>Примеры готовой продукции и материалов по этой услуге.</p>
+      </div>
+      <div class="service-gallery">
+        <% visibleGallery.forEach((image) => { %>
+          <figure>
+            <img src="<%= image.src %>" alt="<%= image.alt || content.title %>" loading="lazy">
+          </figure>
+        <% }) %>
+      </div>
+    </section>
+  <% } %>
+
+  <% if (relatedServices.length) { %>
+    <section class="related-section">
+      <div class="section-heading">
+        <span class="eyebrow">Похожие услуги</span>
+        <h2>Еще из раздела «<%= service.category %>»</h2>
+      </div>
+      <div class="related-grid">
+        <% relatedServices.forEach((item) => { %>
+          <a href="<%= item.url %>">
+            <span><%= item.category %></span>
+            <strong><%= item.title %></strong>
+          </a>
+        <% }) %>
+      </div>
+    </section>
+  <% } %>
+
+  <%- include('../partials/lead-form', {
+    title: 'Заявка на услугу',
+    description: 'Оставьте контакты и параметры заказа. Услуга уже подставлена в форму.',
+    defaultCategory: service.category,
+    sourcePage: `service:${service.slug}`
+  }) %>
+</main>
+
+<%- include('../partials/footer') %>

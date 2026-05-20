@@ -1,0 +1,16 @@
+{
+  "name": "comint-modern-site",
+  "version": "1.0.0",
+  "description": "Обновленный сайт Comint на Node.js, Express и EJS.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "migrate:comint": "node scripts/migrateComintContent.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}

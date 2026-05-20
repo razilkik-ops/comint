@@ -1,0 +1,60 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%
+  const catalogCategories = typeof printCatalogCategories !== 'undefined'
+    ? printCatalogCategories
+    : [{ title: 'Полиграфия', slug: 'print', intro: '', services }];
+
+  const totalServices = catalogCategories.reduce((count, category) => (
+    count + createServiceItems(category).length
+  ), 0);
+%>
+
+<main class="print-catalog-main">
+  <section class="catalog-section print-catalog-section">
+    <div class="section-heading">
+      <span class="eyebrow">Каталог услуг</span>
+      <h2>Полиграфия</h2>
+      <p>Собрали все услуги сайта Comint, кроме сувенирной продукции: печать, наружная реклама, самоклейка, POS-материалы, выставки, навигация и другие решения для бизнеса.</p>
+      <strong class="print-service-count"><%= totalServices %> услуг</strong>
+    </div>
+    <div class="print-filter-tabs" aria-label="Фильтры услуг">
+      <a class="active" href="/print">Все</a>
+      <% catalogCategories.forEach((category) => { %>
+        <a href="#print-category-<%= category.slug %>"><%= category.title %></a>
+      <% }) %>
+    </div>
+    <div class="print-category-list">
+      <% catalogCategories.forEach((category, categoryIndex) => {
+        const categoryServices = createServiceItems(category);
+      %>
+        <section class="print-category-group" id="print-category-<%= category.slug %>">
+          <div class="print-category-heading">
+            <div>
+              <span><%= String(categoryIndex + 1).padStart(2, '0') %></span>
+              <h3><%= category.title %></h3>
+              <% if (category.intro) { %>
+                <p><%= category.intro %></p>
+              <% } %>
+            </div>
+            <strong><%= categoryServices.length %></strong>
+          </div>
+          <div class="service-grid">
+            <% categoryServices.forEach((item, index) => { %>
+              <%- include('../partials/service-card', { item, itemIndex: index + categoryIndex }) %>
+            <% }) %>
+          </div>
+        </section>
+      <% }) %>
+    </div>
+  </section>
+
+  <%- include('../partials/lead-form', {
+    title: 'Заявка на услугу',
+    description: 'Напишите, что нужно изготовить, примерный тираж и желаемые сроки.',
+    defaultCategory: 'Полиграфия и рекламная продукция',
+    sourcePage: 'print'
+  }) %>
+</main>
+
+<%- include('../partials/footer') %>

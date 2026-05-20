@@ -1,0 +1,28 @@
+<section class="banner">
+  <div class="banner_container">
+    <nav class="breadcrumps" aria-label="Хлебные крошки">
+      <a href="/">Главная</a>
+      <svg width="22" height="6" viewBox="0 0 22 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M22 3L17 0.113249V5.88675L22 3ZM0 3.5H17.5V2.5H0V3.5Z" fill="black" />
+      </svg>
+      <span><%= crumb %></span>
+    </nav>
+
+    <h1><%= title %></h1>
+
+    <div class="banner_text_row">
+      <div class="banner_text"><%= text %></div>
+      <% if (typeof rightText !== 'undefined' && rightText) { %>
+        <div class="banner_text_right"><%= rightText %></div>
+      <% } %>
+    </div>
+
+    <% if (typeof phones !== 'undefined' && phones && phones.length) { %>
+      <div class="banner_phones_block">
+        <% phones.forEach((phone) => { %>
+          <div class="banner_phone_box"><a href="tel:<%= phone.href %>"><%= phone.label %></a></div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>

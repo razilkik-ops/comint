@@ -1,0 +1,133 @@
+<section class="lead-section" id="lead-form">
+  <div class="section-heading">
+    <h2><%= title || 'Оставьте заявку' %></h2>
+    <p><%= description || 'Опишите задачу, а менеджер уточнит детали, сроки и стоимость.' %></p>
+  </div>
+
+  <form class="lead-form" data-lead-form>
+    <input type="hidden" name="sourcePage" value="<%= sourcePage %>">
+    <div class="form-grid">
+      <label class="lead-field">
+        <span class="lead-label">Имя <b>*</b></span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M20 21a8 8 0 0 0-16 0" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </span>
+          <input type="text" name="name" placeholder="Ваше имя" required>
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Телефон <b>*</b></span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </span>
+          <input type="tel" name="phone" placeholder="+375 ..." required>
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Email</span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 4h16v16H4z" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+          </span>
+          <input type="email" name="email" placeholder="mail@company.by">
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Компания</span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
+              <path d="M4 7h16v13H4z" />
+              <path d="M4 12h16" />
+            </svg>
+          </span>
+          <input type="text" name="company" placeholder="Название компании">
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Направление</span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <rect x="4" y="4" width="6" height="6" rx="1.5" />
+              <rect x="14" y="4" width="6" height="6" rx="1.5" />
+              <rect x="4" y="14" width="6" height="6" rx="1.5" />
+              <rect x="14" y="14" width="6" height="6" rx="1.5" />
+            </svg>
+          </span>
+          <select name="category" required>
+            <option value="">Выберите направление</option>
+            <% serviceCategories.forEach((categoryName) => { %>
+              <option value="<%= categoryName %>" <%= defaultCategory === categoryName ? 'selected' : '' %>><%= categoryName %></option>
+            <% }) %>
+          </select>
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Что нужно изготовить <b>*</b></span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <rect x="5" y="3" width="12" height="18" rx="2" />
+              <path d="M17 8h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2" />
+            </svg>
+          </span>
+          <input type="text" name="productOrService" placeholder="Например, визитки или кружки" required>
+        </span>
+      </label>
+      <label class="lead-field">
+        <span class="lead-label">Тираж</span>
+        <span class="lead-control">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="m12 3 9 5-9 5-9-5 9-5z" />
+              <path d="m3 13 9 5 9-5" />
+              <path d="m3 18 9 5 9-5" />
+            </svg>
+          </span>
+          <input type="text" name="quantity" placeholder="Например, 500 шт.">
+        </span>
+      </label>
+      <label class="lead-field wide">
+        <span class="lead-label">Комментарий</span>
+        <span class="lead-control lead-control-area">
+          <span class="lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 17 0z" />
+            </svg>
+          </span>
+          <textarea name="comment" rows="5" placeholder="Формат, материал, сроки, пожелания"></textarea>
+        </span>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button class="button lead-submit" type="submit">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m22 2-7 20-4-9-9-4 20-7z" />
+          <path d="M22 2 11 13" />
+        </svg>
+        <span>Отправить заявку</span>
+      </button>
+      <div class="form-note">
+        <span aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        </span>
+        <p class="form-status" role="status" aria-live="polite">Мы свяжемся с вами, чтобы уточнить детали и рассчитать стоимость.</p>
+      </div>
+    </div>
+  </form>
+</section>

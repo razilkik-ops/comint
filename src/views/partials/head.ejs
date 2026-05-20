@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= pageTitle %></title>
+  <meta name="description" content="<%= typeof pageDescription !== 'undefined' && pageDescription ? pageDescription : 'Comint: полиграфия, сувенирная продукция и брендированные материалы для бизнеса.' %>">
+  <% if (typeof canonicalPath !== 'undefined' && canonicalPath) { %>
+    <link rel="canonical" href="<%= canonicalPath %>">
+  <% } %>
+  <meta property="og:title" content="<%= pageTitle %>">
+  <meta property="og:description" content="<%= typeof pageDescription !== 'undefined' && pageDescription ? pageDescription : 'Comint: полиграфия, сувенирная продукция и брендированные материалы для бизнеса.' %>">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<%
+  const classicPagePaths = ['/company', '/services', '/cases', '/oplata-i-dostavka', '/news', '/reviews', '/contacts', '/karta-sajta'];
+%>
+<body class="legacy-theme<%= typeof pageBodyClass !== 'undefined' && pageBodyClass ? ` ${pageBodyClass}` : '' %><%= typeof currentPath !== 'undefined' && classicPagePaths.includes(currentPath) ? ' company-page' : '' %>">

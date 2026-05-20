@@ -1,0 +1,37 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main class="company-copy-page classic-page">
+  <%- include('../partials/classic-banner', {
+    crumb: 'Портфолио',
+    title: 'Каталог портфолио',
+    text: 'Ознакомьтесь с примерами реализованных нами комплексных решений по оформлению, брендированию или рекламе.',
+    rightText: 'В большинстве случаев недостаточно просто напечатать изделие. Для достижения нужного коммерческого эффекта любой элемент должен работать в комплексе. Не говоря уже о том, что мало просто произвести продукт - необходимо заставить его работать!'
+  }) %>
+
+  <section class="portfolio classic-section">
+    <div class="wrap">
+      <div class="portfolio_container">
+        <% portfolio.forEach((item) => { %>
+          <article class="portfolio_block">
+            <div class="portfolio_block_title"><%= item.title %></div>
+            <% (item.texts || [item.text]).filter(Boolean).forEach((text) => { %>
+              <div class="portfolio_block_text"><p><%= text %></p></div>
+            <% }) %>
+            <div class="portfolio_block_slider_wrap">
+              <div class="portfolio_block_slider">
+                <% (item.images || [item.image]).filter(Boolean).forEach((image) => { %>
+                  <div class="portfolio_block_img">
+                    <img src="<%= image %>" alt="<%= item.title %>" loading="lazy">
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

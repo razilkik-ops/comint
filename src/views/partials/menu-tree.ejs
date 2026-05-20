@@ -1,0 +1,35 @@
+<ul class="donor-menu-tree donor-menu-tree-level-<%= level || 0 %>">
+  <% items.forEach((item, index) => { %>
+    <% const hasChildren = Array.isArray(item.children) && item.children.length > 0; %>
+    <%
+      const activePath = typeof requestPath === 'string' ? requestPath : '';
+      const isActive = item.url === activePath;
+      const hasActiveDescendant = (children) => children.some((child) => (
+        child.url === activePath ||
+        (Array.isArray(child.children) && hasActiveDescendant(child.children))
+      ));
+      const isOpen = hasChildren && hasActiveDescendant(item.children);
+    %>
+    <li class="donor-menu-item <%= hasChildren ? 'has-children' : '' %> <%= isActive ? 'active' : '' %> <%= isOpen ? 'open' : '' %>">
+      <div class="donor-menu-item-row">
+        <a href="<%= item.url %>"><%= item.title %></a>
+        <% if (hasChildren) { %>
+          <button
+            class="donor-submenu-toggle"
+            type="button"
+            aria-label="<%= isOpen ? 'Свернуть' : 'Раскрыть' %> <%= item.title %>"
+            aria-expanded="<%= isOpen ? 'true' : 'false' %>"
+            aria-controls="donor-submenu-<%= level || 0 %>-<%= index %>"
+          >
+            <span></span>
+          </button>
+        <% } %>
+      </div>
+      <% if (hasChildren) { %>
+        <div class="donor-submenu" id="donor-submenu-<%= level || 0 %>-<%= index %>" aria-hidden="<%= isOpen ? 'false' : 'true' %>">
+          <%- include('menu-tree', { items: item.children, level: (level || 0) + 1 }) %>
+        </div>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>

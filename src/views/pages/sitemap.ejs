@@ -1,0 +1,45 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main class="company-copy-page classic-page">
+  <%- include('../partials/classic-banner', {
+    crumb: 'Карта сайта',
+    title: 'Карта сайта',
+    text: 'На данной странице вы сможете ознакомиться со списком опубликованных страниц на сайте'
+  }) %>
+
+  <section class="about">
+    <div class="wrap">
+      <div class="content classic-sitemap">
+        <div>
+          <h2>Страницы</h2>
+          <ul>
+            <% headerPrimaryMenu.forEach((item) => { %>
+              <li><a href="<%= item.url %>"><%= item.title %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+        <div>
+          <h2>Категории товаров</h2>
+          <ul>
+            <% serviceCatalog.forEach((category) => { %>
+              <li><a href="/services#category-<%= category.slug %>"><%= category.title %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+        <div>
+          <h2>Товары</h2>
+          <ul>
+            <% serviceCatalog.forEach((category) => { %>
+              <% createServiceItems(category).forEach((item) => { %>
+                <li><a href="<%= item.url %>"><%= item.title %></a></li>
+              <% }) %>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

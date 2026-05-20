@@ -1,0 +1,91 @@
+<%
+  const legacyFooterPaths = ['/company', '/services', '/cases', '/oplata-i-dostavka', '/news', '/reviews', '/contacts', '/karta-sajta'];
+  const useLegacyFooter = typeof currentPath !== 'undefined' && legacyFooterPaths.includes(currentPath);
+%>
+<% if (useLegacyFooter) { %>
+  <footer class="footer copied-footer" id="contacts" itemscope itemtype="https://schema.org/Organization">
+    <div class="wrap">
+      <div class="footer_logo">
+        <a href="/" aria-label="Comint — на главную">
+          <meta itemprop="name" content="ООО “Коминт Техногрупп”">
+          <img class="brand-logo" itemprop="image" src="/comint-logo.svg" alt="<%= siteConfig.companyName %>">
+        </a>
+        <div class="footer_text footer_text_mobile">Наша компания предоставляет услуги оперативной полиграфии, производства сувенирной и рекламной продукции</div>
+      </div>
+
+      <div class="footer_row">
+        <div class="footer_block footer_block_1">
+          <div class="footer_text footer_text_desktop">Наша компания предоставляет услуги оперативной полиграфии, производства сувенирной и рекламной продукции</div>
+          <div class="footer_text" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <div class="f_title">Наш адрес:</div>
+            <span itemprop="postalCode">220125</span>, <span itemprop="addressLocality">Минск</span>, <span itemprop="streetAddress">пр. Независимости 185, офис 28/1.</span> Работаем с 9.00 до 18.00 (пн-чт) и с 9.00 до 17.00 (пт), выходные - суббота, воскресение.
+          </div>
+          <div class="footer_text">
+            <div class="f_title">Наши телефоны:</div>
+            <div class="footer_text_numbers">
+              <a href="tel:80173740024"><span itemprop="telephone">8 (017) 374-00-24</span></a>
+              <a href="tel:+375297007767"><span itemprop="telephone">+375 29 700-77-67</span></a>
+              <a href="tel:80173740026"><span itemprop="telephone">8 (017) 374-00-26</span></a>
+              <a href="tel:+375293929004"><span itemprop="telephone">+375 29 392-90-04</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer_block footer_block_2">
+          <div class="f_title">Основные категории:</div>
+          <ul>
+            <% serviceCatalog.slice(0, 12).forEach((category) => { %>
+              <li><a href="/services#category-<%= category.slug %>"><%= category.title %></a></li>
+            <% }) %>
+            <li><a href="/karta-sajta">Карта сайта</a></li>
+          </ul>
+        </div>
+
+        <div class="footer_block footer_block_3">
+          <a href="/contacts" class="btn">Связаться с нами</a>
+          <div class="footer_box">
+            <div class="f_title">Соц. сети:</div>
+            <div class="social_row" aria-label="Социальные сети">
+              <a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/comintminsk/" aria-label="Instagram">IG</a>
+              <a target="_blank" rel="nofollow noopener" href="https://www.facebook.com/ComintMinsk" aria-label="Facebook">FB</a>
+              <a target="_blank" rel="nofollow noopener" href="https://vk.com/comint" aria-label="VK">VK</a>
+              <a target="_blank" rel="nofollow noopener" href="https://www.youtube.com/channel/UCofXUIKBzxe39KT6BS24qfQ" aria-label="YouTube">YT</a>
+              <a rel="nofollow" href="viber://pa?chatURI=comintminsk" aria-label="Viber">VB</a>
+            </div>
+          </div>
+          <div class="footer_box">
+            <div class="f_title">Напишите нам:</div>
+            <a class="email" href="mailto:<%= siteConfig.email %>" itemprop="email"><%= siteConfig.email %></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer_row_bottom footer_row">
+        <div class="footer_text">ООО “Коминт Техногрупп” © <%= new Date().getFullYear() %></div>
+      </div>
+    </div>
+  </footer>
+<% } else { %>
+  <footer class="site-footer" id="contacts">
+    <div>
+      <a class="brand footer-brand" href="/">
+        <img class="brand-logo" src="/comint-logo.svg" alt="<%= siteConfig.companyName %>">
+      </a>
+      <p>Полиграфия, сувенирная продукция и брендированные материалы под задачи компаний.</p>
+    </div>
+    <div class="footer-links">
+      <a href="tel:<%= siteConfig.phone.replaceAll(' ', '').replaceAll('-', '') %>"><%= siteConfig.phone %></a>
+      <% if (siteConfig.extraPhones) { %>
+        <% siteConfig.extraPhones.forEach((phone) => { %>
+          <a href="tel:<%= phone.replaceAll(' ', '').replaceAll('-', '') %>"><%= phone %></a>
+        <% }) %>
+      <% } %>
+      <a href="mailto:<%= siteConfig.email %>"><%= siteConfig.email %></a>
+      <span><%= siteConfig.address %></span>
+      <span><%= siteConfig.workTime %></span>
+    </div>
+  </footer>
+<% } %>
+<script src="/js/main.js"></script>
+</body>
+</html>
