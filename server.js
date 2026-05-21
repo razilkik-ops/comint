@@ -133,6 +133,10 @@ app.get('/services/:slug', (req, res, next) => {
     return next();
   }
 
+  const backCatalogUrl = service.categorySlug === 'souvenirs'
+    ? '/souvenirs'
+    : `/print#print-category-${service.categorySlug}`;
+
   res.render('pages/service-detail', {
     pageTitle: `${serviceContent[service.slug]?.title || service.title} — Comint`,
     pageDescription: service.description,
@@ -140,6 +144,7 @@ app.get('/services/:slug', (req, res, next) => {
     currentPath: '/services',
     pageBodyClass: 'service-detail-body',
     service,
+    backCatalogUrl,
     content: serviceContent[service.slug] || null,
     relatedServices: getRelatedServices(service.slug)
   });

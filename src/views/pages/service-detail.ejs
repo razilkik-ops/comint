@@ -3,6 +3,9 @@
 <%
   const hasMigratedContent = Boolean(content?.sections?.length);
   const visibleGallery = content?.gallery || [];
+  const catalogBackLink = typeof backCatalogUrl !== 'undefined' && backCatalogUrl
+    ? backCatalogUrl
+    : '/services';
 %>
 
 <main class="service-detail-page">
@@ -21,7 +24,7 @@
         <p><%= service.description %></p>
         <div class="hero-actions">
           <a class="button service-hero-button is-calc" href="#lead-form" data-fill-service="<%= service.title %>" data-fill-category="<%= service.category %>">Рассчитать стоимость</a>
-          <a class="button outline service-hero-button is-back" href="/services">Вернуться в каталог</a>
+          <a class="button outline service-hero-button is-back" href="<%= catalogBackLink %>">Вернуться в каталог</a>
         </div>
       </div>
       <aside class="service-summary">
