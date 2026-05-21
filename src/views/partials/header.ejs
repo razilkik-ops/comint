@@ -130,7 +130,7 @@
     </div>
 
     <%
-      const donorCatalogImageVersion = '20260522-small';
+      const donorCatalogImageVersion = '20260522-tiny';
       const donorCatalogImages = {
         print: '/images/catalog-services/cards/download.jpg',
         souvenirs: '/images/catalog-services/cards/download-1.jpg',
@@ -162,7 +162,7 @@
             <a class="donor-catalog-card-main" href="<%= cardUrl %>">
               <span class="donor-catalog-card-photo<%= imageSrc ? ' has-image' : '' %>" aria-hidden="true">
                 <% if (imageSrc) { %>
-                  <img src="<%= imageSrc %>?v=<%= donorCatalogImageVersion %>" width="300" height="300" alt="" loading="lazy" decoding="async">
+                  <img src="<%= imageSrc %>?v=<%= donorCatalogImageVersion %>" width="160" height="160" alt="" loading="lazy" decoding="async">
                 <% } %>
               </span>
               <span class="donor-catalog-card-title"><%= category.title %></span>

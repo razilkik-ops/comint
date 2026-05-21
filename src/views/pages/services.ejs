@@ -4,7 +4,7 @@
   const catalogToRender = typeof visibleServiceCatalog !== 'undefined' ? visibleServiceCatalog : serviceCatalog;
   const isSearchMode = typeof searchQuery !== 'undefined' && searchQuery;
   const catalogCardsToRender = isSearchMode ? catalogToRender : catalogToRender.slice(0, 12);
-  const catalogImageVersion = '20260522-small';
+  const catalogImageVersion = '20260522-tiny';
   const serviceCardTitles = {
     print: 'Полиграфия',
     souvenirs: 'Сувенирная продукция',
@@ -71,7 +71,7 @@
           <a class="catalog-redesign-card catalog-redesign-card-<%= index % 6 %> catalog-redesign-card-<%= category.slug %>" href="<%= cardUrl %>">
             <span class="catalog-redesign-photo" aria-hidden="true">
               <% if (imageSrc) { %>
-                <img class="catalog-redesign-image" src="<%= imageSrc %>?v=<%= catalogImageVersion %>" width="300" height="300" alt="" loading="eager" decoding="async" fetchpriority="<%= index < 6 ? 'high' : 'auto' %>">
+                <img class="catalog-redesign-image" src="<%= imageSrc %>?v=<%= catalogImageVersion %>" width="160" height="160" alt="" loading="eager" decoding="async" fetchpriority="<%= index < 3 ? 'high' : 'auto' %>">
               <% } else { %>
                 <span class="catalog-redesign-icon catalog-redesign-icon-<%= category.slug %>"></span>
               <% } %>
