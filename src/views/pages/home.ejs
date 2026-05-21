@@ -9,18 +9,18 @@
     const souvenirCategory = serviceCatalog.find((category) => category.slug === 'souvenirs');
     const souvenirServiceSlides = souvenirCategory ? createServiceItems(souvenirCategory) : [];
     const souvenirSlideImages = {
-      'kartonnye-korobki-i-pakety-dlya-upakovki': 'korobki.png',
-      'uf-pechat-v-minske': 'uf-pechat-v-minske-photo.png',
-      'ruchki-s-logotipom': 'ruchki-s-logotipom-photo.png',
-      'ezhednevniki': 'ezhednevniki-photo.png',
-      'breloki-s-logotipom': 'breloki-s-logotipom-photo.png',
-      'pechat-na-magnitax1': 'pechat-na-magnitax1-photo.png',
-      'chasy': 'chasy-photo.png',
-      'flazhki': 'flazhki-photo.png',
-      'bumazhnyie-paketyi': 'bumazhnyie-paketyi-photo.png',
-      'polietilenovyie-paketyi': 'polietilenovyie-paketyi-photo.png',
-      'fleshki-s-logotipom': 'fleshki-s-logotipom-photo.png',
-      'zazhigalki': 'zazhigalki-photo.png'
+      'kartonnye-korobki-i-pakety-dlya-upakovki': 'korobki.jpg',
+      'uf-pechat-v-minske': 'uf-pechat-v-minske-photo.jpg',
+      'ruchki-s-logotipom': 'ruchki-s-logotipom-photo.jpg',
+      'ezhednevniki': 'ezhednevniki-photo.jpg',
+      'breloki-s-logotipom': 'breloki-s-logotipom-photo.jpg',
+      'pechat-na-magnitax1': 'pechat-na-magnitax1-photo.jpg',
+      'chasy': 'chasy-photo.jpg',
+      'flazhki': 'flazhki-photo.jpg',
+      'bumazhnyie-paketyi': 'bumazhnyie-paketyi-photo.jpg',
+      'polietilenovyie-paketyi': 'polietilenovyie-paketyi-photo.jpg',
+      'fleshki-s-logotipom': 'fleshki-s-logotipom-photo.jpg',
+      'zazhigalki': 'zazhigalki-photo.jpg'
     };
   %>
   <section class="hero choice-hero">
@@ -44,7 +44,7 @@
               <a class="button" href="/print">Перейти к полиграфии</a>
             </div>
             <figure class="souvenir-slide-visual print-slide-visual" aria-hidden="true">
-              <img src="/images/catalog-services/print.png" alt="" loading="eager">
+              <img src="/images/catalog-services/print.jpg" alt="" loading="eager">
             </figure>
           </div>
           <% printServiceSlides.forEach((item, index) => { %>
@@ -99,7 +99,7 @@
               <a class="button" href="/souvenirs">Смотреть сувениры</a>
             </div>
             <figure class="souvenir-slide-visual">
-              <img src="/images/souvenir-slides/souvenirs-overview-photo.png" alt="" loading="eager">
+              <img src="/images/souvenir-slides/souvenirs-overview-photo.jpg" alt="" loading="eager">
             </figure>
           </div>
           <% souvenirServiceSlides.forEach((item, index) => { %>
@@ -159,7 +159,7 @@
         buttonClass: 'outline',
         modifier: 'manager',
         image: {
-          src: '/images/manager-robot.png',
+          src: '/images/manager-robot.jpg',
           alt: '',
           loading: 'eager'
         }
