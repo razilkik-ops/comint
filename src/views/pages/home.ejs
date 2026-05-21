@@ -3,6 +3,9 @@
 
 <main>
   <%
+    const printServiceSlides = serviceCatalog
+      .filter((category) => category.slug !== 'souvenirs')
+      .flatMap((category) => createServiceItems(category));
     const souvenirCategory = serviceCatalog.find((category) => category.slug === 'souvenirs');
     const souvenirServiceSlides = souvenirCategory ? createServiceItems(souvenirCategory) : [];
     const souvenirSlideImages = {
@@ -31,15 +34,61 @@
       </div>
     </div>
     <div class="direction-grid hero-directions" aria-label="Выбор направления">
-      <%- include('../partials/direction-card', {
-        icon: '01',
-        title: 'Полиграфия',
-        text: 'Печать визиток, листовок, буклетов, каталогов, наклеек и другой полиграфической продукции.',
-        href: '/print',
-        buttonText: 'Перейти к полиграфии',
-        buttonClass: '',
-        modifier: 'print'
-      }) %>
+      <article class="direction-card print souvenir-slider print-slider" data-souvenir-slider>
+        <div class="souvenir-slider-viewport">
+          <div class="souvenir-slide active" data-souvenir-slide>
+            <div class="souvenir-slide-copy">
+              <div class="direction-icon">01</div>
+              <h3>Полиграфия</h3>
+              <p>Печать визиток, листовок, буклетов, каталогов, наклеек и другой полиграфической продукции.</p>
+              <a class="button" href="/print">Перейти к полиграфии</a>
+            </div>
+            <figure class="souvenir-slide-visual print-slide-visual" aria-hidden="true">
+              <img src="/images/catalog-services/print.png" alt="" loading="eager">
+            </figure>
+          </div>
+          <% printServiceSlides.forEach((item, index) => { %>
+            <div class="souvenir-slide" data-souvenir-slide>
+              <div class="souvenir-slide-copy">
+                <div class="direction-icon"><%= String(index + 2).padStart(2, '0') %></div>
+                <span class="souvenir-slide-kicker"><%= item.category %></span>
+                <h3><%= item.title %></h3>
+                <p>Полиграфия Comint: подберем формат, материал, тираж и подготовим изделие под задачу бизнеса.</p>
+                <a class="button outline" href="<%= item.url %>">Подробнее</a>
+              </div>
+              <figure class="souvenir-slide-visual print-slide-visual" aria-hidden="true"></figure>
+            </div>
+          <% }) %>
+        </div>
+        <div class="souvenir-slider-controls" aria-label="Слайдер услуг полиграфии">
+          <button type="button" class="souvenir-slider-arrow" data-souvenir-prev aria-label="Предыдущий слайд">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15 5 8 12l7 7" />
+            </svg>
+          </button>
+          <div
+            class="souvenir-slider-progress"
+            data-souvenir-progress
+            role="slider"
+            tabindex="0"
+            aria-label="Позиция слайда"
+            aria-valuemin="1"
+            aria-valuemax="<%= printServiceSlides.length + 1 %>"
+            aria-valuenow="1"
+            aria-valuetext="1 из <%= printServiceSlides.length + 1 %>"
+          >
+            <span class="souvenir-slider-progress-track" aria-hidden="true">
+              <span class="souvenir-slider-progress-fill" data-souvenir-progress-fill></span>
+            </span>
+            <span class="souvenir-slider-progress-thumb" data-souvenir-progress-thumb aria-hidden="true"></span>
+          </div>
+          <button type="button" class="souvenir-slider-arrow" data-souvenir-next aria-label="Следующий слайд">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </article>
       <article class="direction-card souvenir souvenir-slider" data-souvenir-slider>
         <div class="souvenir-slider-viewport">
           <div class="souvenir-slide active" data-souvenir-slide>
@@ -103,12 +152,17 @@
       </article>
       <%- include('../partials/direction-card', {
         icon: '03',
-        title: 'Связаться с менеджером',
-        text: 'Не знаете, что выбрать? Напишите менеджеру — поможем подобрать решение под вашу задачу.',
+        title: 'Telegram-бот для заказа',
+        text: 'Бот Comint поможет выбрать продукцию, уточнить детали заказа и купить нужные позиции прямо в Telegram.',
         href: siteConfig.TELEGRAM_MANAGER_URL || '#',
-        buttonText: 'Написать в Telegram',
+        buttonText: 'Купить через бота',
         buttonClass: 'outline',
-        modifier: 'manager'
+        modifier: 'manager',
+        image: {
+          src: '/images/manager-robot.png',
+          alt: '',
+          loading: 'eager'
+        }
       }) %>
     </div>
   </section>

@@ -240,6 +240,7 @@ document.querySelectorAll('[data-souvenir-slider]').forEach((slider) => {
   const progressThumb = slider.querySelector('[data-souvenir-progress-thumb]');
   let currentIndex = slides.findIndex((slide) => slide.classList.contains('active'));
   let isDraggingProgress = false;
+  let activeProgressPointerId = null;
 
   if (currentIndex < 0) {
     currentIndex = 0;
@@ -292,27 +293,46 @@ document.querySelectorAll('[data-souvenir-slider]').forEach((slider) => {
   });
 
   progress?.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0) {
+      return;
+    }
+
     event.preventDefault();
     isDraggingProgress = true;
+    activeProgressPointerId = event.pointerId;
     progress.setPointerCapture?.(event.pointerId);
     renderSlideFromPointer(event.clientX);
   });
 
   progress?.addEventListener('pointermove', (event) => {
-    if (!isDraggingProgress) {
+    if (!isDraggingProgress || event.pointerId !== activeProgressPointerId) {
       return;
     }
 
     renderSlideFromPointer(event.clientX);
   });
 
-  progress?.addEventListener('pointerup', (event) => {
-    isDraggingProgress = false;
-    progress.releasePointerCapture?.(event.pointerId);
-  });
+  const stopProgressDrag = (event) => {
+    if (event && activeProgressPointerId !== null && event.pointerId !== activeProgressPointerId) {
+      return;
+    }
 
-  progress?.addEventListener('pointercancel', () => {
     isDraggingProgress = false;
+    activeProgressPointerId = null;
+
+    if (event?.pointerId !== undefined && progress.hasPointerCapture?.(event.pointerId)) {
+      progress.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  progress?.addEventListener('pointerup', stopProgressDrag);
+  progress?.addEventListener('pointercancel', stopProgressDrag);
+  progress?.addEventListener('lostpointercapture', stopProgressDrag);
+  window.addEventListener('pointerup', stopProgressDrag);
+  window.addEventListener('pointercancel', stopProgressDrag);
+  window.addEventListener('blur', () => {
+    isDraggingProgress = false;
+    activeProgressPointerId = null;
   });
 
   progress?.addEventListener('keydown', (event) => {

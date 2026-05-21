@@ -129,7 +129,56 @@
       </div>
     </div>
 
+    <%
+      const donorCatalogImages = {
+        print: '/images/catalog-services/print-card.png',
+        souvenirs: '/images/catalog-services/souvenirs.png',
+        stickers: '/images/catalog-services/stickers.png',
+        outdoor: '/images/catalog-services/outdoor.png',
+        'large-format': '/images/catalog-services/large-format.png',
+        exhibitions: '/images/catalog-services/exhibitions.png',
+        calendars: '/images/catalog-services/calendars.png',
+        decor: '/images/catalog-services/decor.png',
+        retail: '/images/catalog-services/retail.png',
+        'mobile-equipment': '/images/catalog-services/mobile-equipment.png',
+        navigation: '/images/catalog-services/navigation.png',
+        textile: '/images/catalog-services/textile.png',
+        transport: '/images/catalog-services/transport.png'
+      };
+    %>
     <nav class="donor-catalog-nav" aria-label="Каталог услуг">
+      <div class="donor-catalog-heading">
+        <h2>Каталог</h2>
+        <p>Выберите направление, чтобы посмотреть услуги и оформить заказ</p>
+      </div>
+      <div class="donor-catalog-card-grid">
+        <% serviceCatalog.forEach((category, index) => {
+          const categoryItems = createServiceItems(category);
+          const cardUrl = category.route || categoryItems[0]?.url || '/services';
+          const imageSrc = donorCatalogImages[category.slug];
+        %>
+          <article class="donor-catalog-card donor-catalog-card-<%= index % 6 %>">
+            <a class="donor-catalog-card-main" href="<%= cardUrl %>">
+              <span class="donor-catalog-card-photo<%= imageSrc ? ' has-image' : '' %>" aria-hidden="true">
+                <% if (imageSrc) { %>
+                  <img src="<%= imageSrc %>" alt="" loading="lazy">
+                <% } %>
+              </span>
+              <span class="donor-catalog-card-title"><%= category.title %></span>
+              <span class="donor-catalog-card-arrow" aria-hidden="true">→</span>
+            </a>
+            <div class="donor-catalog-card-services">
+              <ul>
+                <% categoryItems.forEach((item) => { %>
+                  <li>
+                    <a href="<%= item.url %>"><%= item.title %></a>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+          </article>
+        <% }) %>
+      </div>
       <%- include('menu-tree', { items: headerCatalogMenu, level: 0 }) %>
     </nav>
   </div>

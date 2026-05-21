@@ -97,6 +97,7 @@ app.get('/services', (req, res) => {
     pageTitle: 'Каталог услуг — Comint',
     ...metaFor('/services'),
     currentPath: '/services',
+    pageBodyClass: 'catalog-page',
     serviceCatalog,
     visibleServiceCatalog,
     searchQuery,
@@ -137,6 +138,7 @@ app.get('/services/:slug', (req, res, next) => {
     pageDescription: service.description,
     canonicalPath: `/services/${service.slug}`,
     currentPath: '/services',
+    pageBodyClass: 'service-detail-body',
     service,
     content: serviceContent[service.slug] || null,
     relatedServices: getRelatedServices(service.slug)

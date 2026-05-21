@@ -5,7 +5,7 @@ const siteConfig = {
   email: 'zakaz@comint.by',
   address: '220125, Минск, пр. Независимости, 185, офис 28/1',
   workTime: 'Пн-Чт 09:00-18:00, Пт 09:00-17:00',
-  TELEGRAM_MANAGER_URL: '',
+  TELEGRAM_MANAGER_URL: 'https://t.me/comintmanagerbot',
   bitrixWebhookUrl: ''
 };
 

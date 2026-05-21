@@ -1,6 +1,13 @@
 <article class="direction-card <%= modifier || '' %>">
-  <div class="direction-icon"><%= icon %></div>
-  <h3><%= title %></h3>
-  <p><%= text %></p>
-  <a class="button <%= buttonClass || '' %>" href="<%= href %>"><%= buttonText %></a>
+  <div class="direction-card-content">
+    <div class="direction-icon"><%= icon %></div>
+    <h3><%= title %></h3>
+    <p><%= text %></p>
+    <a class="button <%= buttonClass || '' %>" href="<%= href %>"><%= buttonText %></a>
+  </div>
+  <% if (typeof image !== 'undefined' && image) { %>
+    <figure class="direction-card-visual">
+      <img src="<%= image.src %>" alt="<%= image.alt || '' %>" loading="<%= image.loading || 'lazy' %>">
+    </figure>
+  <% } %>
 </article>

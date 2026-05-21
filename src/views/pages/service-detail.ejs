@@ -9,9 +9,9 @@
   <section class="service-detail-hero <%= content?.heroImage ? 'has-service-image' : '' %>">
     <div class="breadcrumbs">
       <a href="/">Главная</a>
-      <span>/</span>
+      <span>›</span>
       <a href="/services">Каталог</a>
-      <span>/</span>
+      <span>›</span>
       <a href="/services#category-<%= service.categorySlug %>"><%= service.category %></a>
     </div>
     <div class="service-detail-grid">
@@ -20,8 +20,8 @@
         <h1><%= content?.title || service.title %></h1>
         <p><%= service.description %></p>
         <div class="hero-actions">
-          <a class="button" href="#lead-form" data-fill-service="<%= service.title %>" data-fill-category="<%= service.category %>">Рассчитать стоимость</a>
-          <a class="button outline" href="/services">Вернуться в каталог</a>
+          <a class="button service-hero-button is-calc" href="#lead-form" data-fill-service="<%= service.title %>" data-fill-category="<%= service.category %>">Рассчитать стоимость</a>
+          <a class="button outline service-hero-button is-back" href="/services">Вернуться в каталог</a>
         </div>
       </div>
       <aside class="service-summary">
@@ -40,17 +40,6 @@
       </aside>
     </div>
   </section>
-
-  <% if (hasMigratedContent) { %>
-    <nav class="service-section-nav" aria-label="Разделы страницы">
-      <% content.sections.forEach((section, index) => { %>
-        <a href="#<%= section.id %>"><span><%= String(index + 1).padStart(2, '0') %></span><%= section.title %></a>
-      <% }) %>
-      <% if (visibleGallery.length) { %>
-        <a href="#service-gallery"><span>Фото</span>Галерея работ</a>
-      <% } %>
-    </nav>
-  <% } %>
 
   <% if (hasMigratedContent) { %>
     <section class="migrated-content">
