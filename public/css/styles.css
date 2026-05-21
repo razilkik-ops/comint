@@ -9027,22 +9027,22 @@ body.company-page .catalog-redesign-heading p {
 body.company-page .catalog-redesign-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px 34px;
+  gap: 26px 30px;
 }
 
 body.company-page .catalog-redesign-card {
   position: relative;
   display: grid;
-  height: 186px;
-  grid-template-columns: 132px minmax(0, 1fr) 60px;
+  height: 154px;
+  grid-template-columns: 104px minmax(0, 1fr) 50px;
   align-items: center;
-  gap: 40px;
-  padding: 28px 34px 28px 32px;
+  gap: 28px;
+  padding: 24px 30px 24px 28px;
   overflow: hidden;
   border: 0 !important;
-  border-radius: 24px;
+  border-radius: 22px;
   background: rgba(255, 255, 255, 0.82) !important;
-  box-shadow: 0 20px 58px rgba(50, 47, 68, 0.055);
+  box-shadow: 0 18px 48px rgba(50, 47, 68, 0.052);
   color: #111111;
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -9051,14 +9051,14 @@ body.company-page .catalog-redesign-card {
 body.company-page .catalog-redesign-card:hover,
 body.company-page .catalog-redesign-card:focus-visible {
   background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 28px 70px rgba(123, 43, 226, 0.12), 0 12px 32px rgba(225, 62, 203, 0.08);
-  transform: translateY(-3px);
+  box-shadow: 0 24px 58px rgba(123, 43, 226, 0.11), 0 10px 28px rgba(225, 62, 203, 0.075);
+  transform: translateY(-2px);
 }
 
 body.company-page .catalog-redesign-photo {
   position: relative;
   display: grid;
-  width: 132px;
+  width: 104px;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
@@ -9347,23 +9347,33 @@ body.company-page .catalog-redesign-icon-transport::after {
 body.company-page .catalog-redesign-title {
   min-width: 0;
   color: #111111;
-  font-size: 27px;
+  font-size: 24px;
   font-weight: 900;
-  line-height: 1.34;
+  line-height: 1.24;
+  overflow-wrap: anywhere;
 }
 
 body.company-page .catalog-redesign-arrow {
+  position: relative;
   display: grid;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   place-items: center;
   border: 2px solid rgba(231, 63, 212, 0.27);
   border-radius: 50%;
   color: #df2fc8;
-  font-size: 28px;
+  font-size: 0;
   font-weight: 900;
   line-height: 1;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+body.company-page .catalog-redesign-arrow::before {
+  content: "→";
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 body.company-page .catalog-redesign-card:hover .catalog-redesign-arrow,
@@ -9371,7 +9381,7 @@ body.company-page .catalog-redesign-card:focus-visible .catalog-redesign-arrow {
   border-color: transparent;
   background: linear-gradient(90deg, #7628e7 0%, #e235c7 100%);
   color: #ffffff;
-  transform: translateX(3px);
+  transform: translateX(1px);
 }
 
 body.company-page .catalog-redesign .service-search-empty {
@@ -9391,12 +9401,12 @@ body.company-page .catalog-redesign .service-search-empty {
   }
 
   body.company-page .catalog-redesign-card {
-    grid-template-columns: 112px minmax(0, 1fr) 54px;
-    gap: 28px;
+    grid-template-columns: 92px minmax(0, 1fr) 46px;
+    gap: 22px;
   }
 
   body.company-page .catalog-redesign-photo {
-    width: 112px;
+    width: 92px;
   }
 
 }
@@ -9467,7 +9477,7 @@ body.company-page .catalog-redesign .service-search-empty {
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-menu-panel {
   min-height: 100vh !important;
   margin-left: 100px !important;
-  padding: 48px clamp(42px, 4.8vw, 88px) 76px clamp(76px, 6vw, 112px) !important;
+  padding: 34px clamp(34px, 4.2vw, 72px) 64px clamp(58px, 5.2vw, 92px) !important;
   background:
     radial-gradient(ellipse at 6% 18%, rgba(124, 223, 232, 0.36) 0 24%, transparent 52%),
     radial-gradient(ellipse at 94% 18%, rgba(232, 118, 224, 0.24) 0 24%, transparent 52%),
@@ -9481,7 +9491,7 @@ body.company-page .catalog-redesign .service-search-empty {
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-menu-top {
-  margin-bottom: clamp(86px, 8vw, 124px) !important;
+  margin-bottom: clamp(42px, 4.5vw, 72px) !important;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-menu-close {
@@ -9496,14 +9506,14 @@ body.company-page .catalog-redesign .service-search-empty {
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-heading {
   display: block;
-  width: min(100%, 1720px);
-  margin: 0 auto clamp(44px, 4.5vw, 64px);
+  width: min(100%, 1640px);
+  margin: 0 auto clamp(28px, 3.2vw, 44px);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-heading h2 {
-  margin: 0 0 18px;
+  margin: 0 0 12px;
   color: #050505;
-  font-size: clamp(58px, 5.2vw, 88px);
+  font-size: clamp(48px, 4.5vw, 72px);
   font-weight: 900;
   line-height: 1;
 }
@@ -9512,24 +9522,24 @@ body.company-page .catalog-redesign .service-search-empty {
   max-width: 760px;
   margin: 0;
   color: rgba(5, 5, 5, 0.48);
-  font-size: clamp(20px, 1.35vw, 26px);
+  font-size: clamp(17px, 1.15vw, 22px);
   font-weight: 700;
   line-height: 1.35;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-grid {
   display: grid;
-  width: min(100%, 1720px);
+  width: min(100%, 1640px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 2.3vw, 36px) clamp(30px, 2.5vw, 42px);
+  gap: clamp(22px, 1.8vw, 30px) clamp(24px, 2vw, 34px);
   margin: 0 auto;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card {
   position: relative;
   z-index: 1;
-  min-height: clamp(148px, 8.8vw, 174px);
-  border-radius: 24px;
+  min-height: clamp(120px, 7vw, 138px);
+  border-radius: 20px;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:hover,
@@ -9539,14 +9549,14 @@ body.company-page .catalog-redesign .service-search-empty {
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-main {
   display: grid;
-  min-height: clamp(148px, 8.8vw, 174px);
-  grid-template-columns: clamp(104px, 6.2vw, 126px) minmax(0, 1fr) 58px;
+  min-height: clamp(120px, 7vw, 138px);
+  grid-template-columns: clamp(82px, 5vw, 96px) minmax(0, 1fr) 46px;
   align-items: center;
-  gap: clamp(24px, 2vw, 34px);
-  padding: clamp(24px, 2vw, 32px) clamp(26px, 2vw, 34px);
-  border-radius: 24px;
+  gap: clamp(18px, 1.5vw, 26px);
+  padding: clamp(18px, 1.45vw, 24px) clamp(20px, 1.55vw, 28px);
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 22px 58px rgba(46, 37, 70, 0.06);
+  box-shadow: 0 18px 44px rgba(46, 37, 70, 0.055);
   color: #050505;
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -9555,14 +9565,14 @@ body.company-page .catalog-redesign .service-search-empty {
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:hover .donor-catalog-card-main,
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:focus-within .donor-catalog-card-main {
   background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 28px 70px rgba(123, 43, 226, 0.12), 0 12px 32px rgba(225, 62, 203, 0.08);
-  transform: translateY(-3px);
+  box-shadow: 0 22px 54px rgba(123, 43, 226, 0.11), 0 10px 28px rgba(225, 62, 203, 0.075);
+  transform: translateY(-2px);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-photo {
   position: relative;
   display: block;
-  width: clamp(94px, 5.7vw, 112px);
+  width: clamp(78px, 4.6vw, 90px);
   aspect-ratio: 1;
   border-radius: 50%;
   background:
@@ -9592,24 +9602,35 @@ body.company-page .catalog-redesign .service-search-empty {
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-title {
+  min-width: 0;
   color: #050505;
-  font-size: clamp(22px, 1.45vw, 28px);
+  font-size: clamp(19px, 1.22vw, 24px);
   font-weight: 900;
-  line-height: 1.28;
+  line-height: 1.22;
+  overflow-wrap: anywhere;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-arrow {
+  position: relative;
   display: grid;
-  width: 54px;
-  height: 54px;
+  width: 46px;
+  height: 46px;
   place-items: center;
-  border: 2px solid rgba(226, 53, 199, 0.28);
+  border: 2px solid rgba(226, 53, 199, 0.26);
   border-radius: 50%;
   color: #e235c7;
-  font-size: 29px;
+  font-size: 0;
   font-weight: 900;
   line-height: 1;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-arrow::before {
+  content: "→";
+  display: block;
+  font-size: 23px;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:hover .donor-catalog-card-arrow,
@@ -9617,50 +9638,54 @@ body.company-page .catalog-redesign .service-search-empty {
   border-color: transparent;
   background: linear-gradient(90deg, #7628e7 0%, #e235c7 100%);
   color: #ffffff;
-  transform: translateX(3px);
+  transform: translateX(1px);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-services {
   position: absolute;
   z-index: 4;
-  right: 0;
-  left: 0;
-  top: calc(100% - 12px);
+  right: 8px;
+  left: 8px;
+  top: calc(100% + 8px);
   max-height: 0;
   overflow: hidden;
-  border-radius: 0 0 24px 24px;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 28px 70px rgba(123, 43, 226, 0.12), 0 14px 34px rgba(46, 37, 70, 0.08);
+  border: 1px solid rgba(226, 53, 199, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 22px 48px rgba(123, 43, 226, 0.11), 0 10px 28px rgba(46, 37, 70, 0.07);
   opacity: 0;
-  transform: translateY(-8px);
-  transition: max-height 220ms ease, opacity 180ms ease, transform 180ms ease;
+  transform: translateY(-4px);
+  transition: max-height 220ms ease, opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:hover .donor-catalog-card-services,
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card:focus-within .donor-catalog-card-services {
-  max-height: 390px;
+  max-height: 292px;
+  border-color: rgba(226, 53, 199, 0.16);
   opacity: 1;
   transform: translateY(0);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-services ul {
   display: grid;
-  gap: 7px;
-  max-height: 356px;
+  gap: 4px;
+  max-height: 268px;
   margin: 0;
-  padding: 22px 24px 24px;
+  padding: 12px;
   overflow: auto;
   list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(226, 53, 199, 0.3) transparent;
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-services a {
   display: block;
-  padding: 8px 10px;
+  padding: 7px 10px;
   border-radius: 10px;
   color: rgba(5, 5, 5, 0.7);
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 700;
-  line-height: 1.22;
+  line-height: 1.25;
   text-decoration: none;
 }
 
