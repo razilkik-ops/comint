@@ -9037,7 +9037,7 @@ body.company-page .catalog-redesign-card {
   grid-template-columns: 120px minmax(0, 1fr) 50px;
   align-items: center;
   gap: 24px;
-  padding: 24px 30px 24px 28px;
+  padding: 17px 30px 17px 28px;
   overflow: hidden;
   border: 0 !important;
   border-radius: 22px;
@@ -9059,10 +9059,13 @@ body.company-page .catalog-redesign-photo {
   position: relative;
   display: grid;
   width: 120px;
-  height: 92px;
+  height: 120px;
+  aspect-ratio: 1;
   place-items: center;
+  overflow: hidden;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.42);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.03);
   filter: saturate(1.06);
 }
 
@@ -9417,11 +9420,13 @@ body.company-page .catalog-redesign .service-search-empty {
   body.company-page .catalog-redesign-card {
     grid-template-columns: 104px minmax(0, 1fr) 46px;
     gap: 20px;
+    padding-top: 17px;
+    padding-bottom: 17px;
   }
 
   body.company-page .catalog-redesign-photo {
     width: 104px;
-    height: 82px;
+    height: 104px;
   }
 
 }
@@ -9462,7 +9467,7 @@ body.company-page .catalog-redesign .service-search-empty {
 
   body.company-page .catalog-redesign-photo {
     width: 88px;
-    height: 68px;
+    height: 88px;
   }
 
   body.company-page .catalog-redesign-icon {
@@ -9569,7 +9574,7 @@ body.company-page .catalog-redesign .service-search-empty {
   grid-template-columns: clamp(104px, 6.4vw, 122px) minmax(0, 1fr) 46px;
   align-items: center;
   gap: clamp(16px, 1.35vw, 24px);
-  padding: clamp(18px, 1.45vw, 24px) clamp(20px, 1.55vw, 28px);
+  padding: clamp(14px, 1.05vw, 18px) clamp(20px, 1.55vw, 28px);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 18px 44px rgba(46, 37, 70, 0.055);
@@ -9589,10 +9594,13 @@ body.company-page .catalog-redesign .service-search-empty {
   position: relative;
   display: grid;
   width: clamp(104px, 6.4vw, 122px);
-  height: clamp(72px, 4.6vw, 88px);
+  height: clamp(104px, 6.4vw, 122px);
+  aspect-ratio: 1;
   place-items: center;
+  overflow: hidden;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.44);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.03);
 }
 
 .legacy-theme .donor-menu[data-mode="catalog"] .donor-catalog-card-photo::after {
